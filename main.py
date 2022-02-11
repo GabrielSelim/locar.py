@@ -64,7 +64,7 @@ def chama_segunda_tela():
     tela_login.label_6.setText("")
     nome_usuario = tela_login.lineEdit.text()
     senha = tela_login.lineEdit_2.text()
-    if nome_usuario == "joao123" and senha == "123456":
+    if nome_usuario == "gabriel123" and senha == "123456":
         tela_login.close()
         tela_inicial.show()
     else:
