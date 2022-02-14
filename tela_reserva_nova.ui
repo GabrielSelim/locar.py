@@ -379,6 +379,12 @@ color: rgb(255, 255, 255);</string>
     <property name="text">
      <string/>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>Exemplo: Ano/Mes/Dia - 2022/02/20</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_2">
     <property name="geometry">
@@ -406,6 +412,12 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>Exemplo: Ano/Mes/Dia - 2022/02/20</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_4">
@@ -462,6 +474,12 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>Somente os numeros</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">

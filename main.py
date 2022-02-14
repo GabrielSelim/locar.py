@@ -1,6 +1,6 @@
 from PyQt5 import uic, QtWidgets
 # from classe_reserva import Reserva
-from classe_veiculo import Veiculo
+# from classe_veiculo import Veiculo
 # from PyQt5.QtWidgets import *
 # from PyQt5.QtCore import Qt, QSortFilterProxyModel
 # from PyQt5.QtGui import QStandardItem, QStandardItemModel
@@ -96,12 +96,11 @@ def add_cliente():
     email_cliente = tela_cadastrar_usuario.line_email_cliente.text()
     cpf_cliente = tela_cadastrar_usuario.line_cpf_cliente.text()
     cnh_cliente = tela_cadastrar_usuario.line_cnh_cliente.text()
-    if nome_cliente == "" or email_cliente == "" or cpf_cliente == "" or cnh_cliente == "" or len(
-            cpf_cliente) > 11 or len(cnh_cliente) > 11 or len(cpf_cliente) < 11 or len(cnh_cliente) < 1:
+    if nome_cliente == "" or email_cliente == "" or cpf_cliente == "" or cnh_cliente == "":
         print("Preencha todos os Campos")
     else:
-        cadastro(
-            f"INSERT INTO cliente VALUES (DEFAULT, '{nome_cliente}', '{email_cliente}', '{cpf_cliente}', '{cnh_cliente}')")
+        cadastro("INSERT INTO `cliente`(`id_cpf`, `nome`, `email`, `cnh`) VALUES ('{}','{}','{}','{}')".
+                 format(cpf_cliente, nome_cliente, email_cliente, cnh_cliente))
         print("Adicionado ao BD")
 
 
@@ -110,9 +109,6 @@ def limpar_add_cliente():
     tela_cadastrar_usuario.line_email_cliente.clear()
     tela_cadastrar_usuario.line_cpf_cliente.clear()
     tela_cadastrar_usuario.line_cnh_cliente.clear()
-
-
-Veiculo.valor_diaria = 300
 
 
 def chamar_cadastro_reserva():
@@ -157,11 +153,14 @@ def add_veiculo():
     categoria = tela_cadastro_veiculo.lineEdit_95.text()
     print(modelo, cor, placa, chassi, ano, status, nome, valor_pago, km_rodados, tipo_combustivel, categoria, marca,
           ar_condicionado)
-    if modelo == "" or cor == "" or placa == "" or chassi == "" or ano == "" or status == "" or ar_condicionado == "" or marca == "" or nome == "" or valor_pago == "" or km_rodados == "" or tipo_combustivel == "" or categoria == "":
+    if modelo == "" or cor == "" or placa == "" or chassi == "" or ano == "" or status == "" or \
+            ar_condicionado == "" or marca == "" or nome == "" or valor_pago == "" or km_rodados == "" or \
+            tipo_combustivel == "" or categoria == "":
         print("Preencha todos os Campos")
     else:
         cadastro(
-            f"INSERT INTO veiculos VALUES ('{modelo}', '{cor}', '{placa}', '{chassi}', '{ano}', '{status}', '{ar_condicionado}', '{marca}', '{nome}', '{valor_pago}', '{km_rodados}','{categoria}', DEFAULT)")
+            f"INSERT INTO veiculos VALUES ('{modelo}', '{cor}', '{placa}', '{chassi}', '{ano}', '{status}', "
+            f"'{ar_condicionado}', '{marca}', '{nome}', '{valor_pago}', '{km_rodados}','{categoria}', DEFAULT)")
         print("Adicionado ao BD")
 
 
@@ -187,7 +186,8 @@ def reserva():
     forma_pagamento = tela_cadastro_reserva.comboBox.currentText()
     qtde_diaria = tela_cadastro_reserva.lineEdit_4.text()
     cpf_cliente_reserva = tela_cadastro_reserva.lineEdit_5.text()
-    valor_total = int(qtde_diaria) * Veiculo.valor_diaria
+    valor_diaria = 300
+    valor_total = int(qtde_diaria) * valor_diaria
     tela_cadastro_reserva.label7_3.setText(f'R$ {valor_total:,.2f}')
     # serviços adicionais
     seguro_veicular_1 = tela_cadastro_reserva.comboBox_4.currentText()
@@ -200,7 +200,9 @@ def reserva():
     if data_retirada == "" or data_devolucao == "" or qtde_diaria == "" or cpf_cliente_reserva == "":
         print("Preencha todos os Campos")
     else:
-        cadastro(f"INSERT INTO reserva VALUES (DEFAULT, '{data_retirada}', '{data_devolucao}', '{forma_pagamento}', '{qtde_diaria}', '{cpf_cliente_reserva}', '{12200}', '{seguro_veicular_1}', '{seguro_veicular_2}', '{seguro_veicular_3}', '{cadeira_bebe}', '{bebe_conforto}', '{condutor_extra}' )")
+        cadastro(f"INSERT INTO reserva VALUES (DEFAULT, '{data_retirada}', '{data_devolucao}', '{forma_pagamento}', "
+                 f"'{qtde_diaria}', '{cpf_cliente_reserva}', '{12200}', '{seguro_veicular_1}', '{seguro_veicular_2}', "
+                 f"'{seguro_veicular_3}', '{cadeira_bebe}', '{bebe_conforto}', '{condutor_extra}' )")
         print("Adicionado ao BD")
 
 
@@ -209,7 +211,6 @@ def limpar_reserva():
     tela_cadastro_reserva.lineEdit_2.clear()
     tela_cadastro_reserva.lineEdit_4.clear()
     tela_cadastro_reserva.lineEdit_5.clear()
-    tela_cadastro_reserva.label7_3.clear()
 
 
 app = QtWidgets.QApplication([])

@@ -548,6 +548,12 @@ color: rgb(255, 255, 255);</string>
     <property name="text">
      <string/>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>Exemplo: Ano/Mes/Dia - 2022/02/20</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_3">
     <property name="geometry">
@@ -685,6 +691,12 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>Exemplo: Ano/Mes/Dia - 2022/02/20</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="checkBox_2">
