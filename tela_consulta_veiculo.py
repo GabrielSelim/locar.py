@@ -3,7 +3,7 @@ from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from PyQt5.QtGui import QStandardItem, QStandardItemModel
 
-carros = ('Sedan', 'Hatch', 'SUV', 'Utilitário', 'Caminhonete', 'Sportivo')
+'''carros = ('Sedan', 'Hatch', 'SUV', 'Utilitário', 'Caminhonete', 'Sportivo')
 modelo = QStandardItemModel(len(carros), 1)
 modelo.setHorizontalHeaderLabels(['Carros'])
 
@@ -20,4 +20,4 @@ app = QtWidgets.QApplication([])
 tela = uic.loadUi("tela_consulta_veiculo.ui")
 tela.tableView.setModel(filtro)
 tela.tableView.horizontalHeader().setStyleSheet("font-size: 35px;color: rgb(50, 50, 255);")
-tela.lineEdit.textChanged.connect(filtro.setFilterRegExp)
+tela.lineEdit.textChanged.connect(filtro.setFilterRegExp)'''

@@ -3,12 +3,12 @@ from PyQt5 import uic, QtWidgets
 # from classe_veiculo import Veiculo
 from PyQt5.QtWidgets import *
 # from PyQt5.QtCore import Qt, QSortFilterProxyModel
-from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtCore import  pyqtSlot
-from PyQt5.QtPrintSupport import *
-import os,sys
-from PyQt5.QtWidgets import QApplication,QWidget,QPushButton
-import tela_consulta_veiculo
+# from PyQt5.QtGui import QIcon, QPixmap
+# from PyQt5.QtCore import  pyqtSlot
+# from PyQt5.QtPrintSupport import *
+# import os,sys
+# from PyQt5.QtWidgets import QApplication,QWidget,QPushButton
+# import tela_consulta_veiculo
 import pymysql.cursors
 from contextlib import contextmanager
 
@@ -36,8 +36,14 @@ def consulta(sql):
     with conecta() as conexao:
         with conexao.cursor() as cursor:
             cursor.execute(sql)
-            resultado = cursor.fetchone()
-            print(resultado)
+            return cursor.fetchone()
+
+
+def pega_pega_dados(sql):
+    with conecta() as conexao:
+        with conexao.cursor() as cursor:
+            cursor.execute(sql)
+            return cursor.fetchall()
 
 
 #   Função de inserção de dados no BD
@@ -53,14 +59,13 @@ def chama_segunda_tela():
     tela_login.label_6.setText("")
     nome_usuario = tela_login.lineEdit.text()
     senha = tela_login.lineEdit_2.text()
-    consulta(f"SELECT acesso FROM usuario WHERE login = '{nome_usuario}' AND senha = '{senha}'")
-    if nome_usuario == 'gabriel123' and senha == '123456':
+    x = pega_pega_dados(f"SELECT acesso FROM usuario WHERE login = '{nome_usuario}' AND senha = '{senha}'")
+    if x:
         tela_login.close()
         tela_inicial.show()
     else:
         tela_login.label_6.setText("Dados de login incorretos!")
         QMessageBox.information(QMessageBox(), "Alerta", "Dados inseridos não existentes")
-
 
 
 def limpar_tela_login():
@@ -74,7 +79,8 @@ def sair():
     tela_cadastro_reserva.close()
     tela_alterar_reserva_1.close()
     tela_alterar_reserva_2.close()
-    tela_cadastro_consulta_veicular.close()
+    tela_cadastro_consulta_veicular_1.close()
+    tela_cadastro_consulta_veicular_2.close()
     tela_inicial.close()
     tela_login.show()
 
@@ -85,7 +91,8 @@ def voltar_tela_inicial():
     tela_cadastro_reserva.close()
     tela_alterar_reserva_1.close()
     tela_alterar_reserva_2.close()
-    tela_cadastro_consulta_veicular.close()
+    tela_cadastro_consulta_veicular_1.close()
+    tela_cadastro_consulta_veicular_2.close()
     tela_inicial.show()
 
 
@@ -112,7 +119,6 @@ def add_cliente():
                  format(cpf_cliente, nome_cliente, email_cliente, cnh_cliente))
         print("Adicionado ao BD")
         QMessageBox.information(QMessageBox(), "Cadastro de Cliente", "O cadastro ao BD foi realizado com sucesso")
-
 
 
 def limpar_add_cliente():
@@ -143,7 +149,7 @@ def chamar_alterar_reserva_1():
 
 
 def tela_consulta_carro():
-    x = tela_consulta_veiculo.tela
+    x = tela_cadastro_consulta_veicular_1
     tela_inicial.close()
     x.show()
 
@@ -186,6 +192,25 @@ def limpa_tela_cadastro_veiculo():
     tela_cadastro_veiculo.lineEdit_91.clear()
     tela_cadastro_veiculo.lineEdit_92.clear()
     tela_cadastro_veiculo.lineEdit_95.clear()
+
+
+def consulta_veiculo():
+    texto_selecionado = tela_cadastro_consulta_veicular_1.comboBox_2.currentText()
+    print(texto_selecionado)
+    pega = pega_pega_dados(f"SELECT `modelo`, `cor`, `placa`, `ar_condicionado`, `marca`, `nome`, `km_rodados`, "
+                           f"`tipo_combustivel`, `preco_locacao`, `id_veiculo` FROM `veiculos` "
+                           f"WHERE modelo = '{texto_selecionado}'")
+    print(pega)
+    tela_cadastro_consulta_veicular_2.tableWidget.setRowCount(0)
+    for linha, dados in enumerate(pega):
+        tela_cadastro_consulta_veicular_2.tableWidget.insertRow(linha)
+        for coluna_n, x in enumerate(dados):
+            tela_cadastro_consulta_veicular_2.tableWidget.setItem(linha, coluna_n, QTableWidgetItem(str(dados)))
+
+
+def consulta_veiculo_troca_tela():
+    tela_cadastro_consulta_veicular_1.close()
+    tela_cadastro_consulta_veicular_2.show()
 
 
 def reserva():
@@ -233,7 +258,9 @@ tela_cadastro_reserva = uic.loadUi("tela_reserva_nova.ui")
 tela_alterar_reserva_1 = uic.loadUi("tela_alterar_reserva_nova.ui")
 tela_alterar_reserva_2 = uic.loadUi("tela_alterar_reserva2_nova.ui")
 tela_cadastrar_usuario = uic.loadUi("tela_cadastrar_cliente_nova.ui")
-tela_cadastro_consulta_veicular = tela_consulta_veiculo.tela
+# tela_cadastro_consulta_veicular = tela_consulta_veiculo.tela
+tela_cadastro_consulta_veicular_1 = uic.loadUi("tela_consulta_veiculo_modificada.ui")
+tela_cadastro_consulta_veicular_2 = uic.loadUi("tela_consulta_veiculo_2.ui")
 
 # Button
 tela_login.pushButton.clicked.connect(chama_segunda_tela)
@@ -246,8 +273,8 @@ tela_cadastro_reserva.pushButton_5.clicked.connect(sair)
 tela_alterar_reserva_1.pushButton_5.clicked.connect(sair)
 tela_alterar_reserva_2.pushButton_5.clicked.connect(sair)
 tela_cadastrar_usuario.pushButton_5.clicked.connect(sair)
-
-tela_cadastro_consulta_veicular.pushButton_5.clicked.connect(sair)
+tela_cadastro_consulta_veicular_1.pushButton_5.clicked.connect(sair)
+tela_cadastro_consulta_veicular_2.pushButton_5.clicked.connect(sair)
 
 # Button Tela Inicial
 tela_cadastro_veiculo.pushButton.clicked.connect(voltar_tela_inicial)
@@ -255,7 +282,8 @@ tela_cadastro_reserva.pushButton_4.clicked.connect(voltar_tela_inicial)
 tela_alterar_reserva_1.pushButton_4.clicked.connect(voltar_tela_inicial)
 tela_alterar_reserva_2.pushButton_4.clicked.connect(voltar_tela_inicial)
 tela_cadastrar_usuario.pushButton_4.clicked.connect(voltar_tela_inicial)
-tela_cadastro_consulta_veicular.pushButton_4.clicked.connect(voltar_tela_inicial)
+tela_cadastro_consulta_veicular_1.botao_tela_inicial.clicked.connect(voltar_tela_inicial)
+tela_cadastro_consulta_veicular_2.pushButton_4.clicked.connect(voltar_tela_inicial)
 
 # Button Opções na Tela Inicial
 tela_inicial.pushButton_3.clicked.connect(chamar_cadastro_veiculo)
@@ -270,10 +298,13 @@ tela_inicial.pushButton_11.clicked.connect(tela_consulta_carro)
 # tela_inicial.pushButton_12.clicked.connect(reserva)
 tela_inicial.pushButton_13.clicked.connect(chamar_alterar_reserva_1)
 
-# Button seleciona classe do veiculo na tela de reserva (botão SUBMIT)
+# Button (botão SUBMIT)
 tela_cadastro_reserva.pushButton_2.clicked.connect(reserva)
 tela_cadastro_veiculo.pushButton_2.clicked.connect(add_veiculo)
 tela_cadastrar_usuario.pushButton_2.clicked.connect(add_cliente)
+tela_cadastro_consulta_veicular_1.pushButton_2.clicked.connect(consulta_veiculo)
+
+tela_cadastro_consulta_veicular_1.pushButton_2.clicked.connect(consulta_veiculo_troca_tela)
 
 
 # Button Submit limpa as telas
