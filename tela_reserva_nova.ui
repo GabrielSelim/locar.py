@@ -770,16 +770,6 @@ color: rgb(255, 255, 255);</string>
     </item>
     <item>
      <property name="text">
-      <string>Moto</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Caminhão</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
       <string>Sportivo</string>
      </property>
     </item>

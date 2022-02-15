@@ -529,34 +529,6 @@ color: rgb(255, 255, 255);</string>
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>190</y>
-      <width>260</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>260</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>260</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 170, 255);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="lineEdit_2">
     <property name="geometry">
      <rect>
@@ -583,6 +555,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_3">
@@ -721,40 +696,6 @@ color: rgb(255, 255, 255);</string>
      <string>Novo ou Usado</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_7">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>370</y>
-      <width>260</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>260</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>260</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 170, 255);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>(S / N)</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="lineEdit_8">
     <property name="geometry">
      <rect>
@@ -782,6 +723,9 @@ color: rgb(255, 255, 255);</string>
     <property name="text">
      <string/>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_9">
     <property name="geometry">
@@ -807,6 +751,9 @@ color: rgb(255, 255, 255);</string>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(0, 170, 255);</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_91">
     <property name="geometry">
@@ -831,6 +778,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(170, 170, 255);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
      <string>Exemplo: 70000</string>
@@ -859,6 +809,9 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(0, 170, 255);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
@@ -895,31 +848,6 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Submit</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_93">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>520</y>
-      <width>260</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>260</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>260</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(170, 170, 255);</string>
     </property>
    </widget>
    <widget class="QLabel" name="label91_2">
@@ -989,7 +917,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(170, 170, 255);</string>
+     <string notr="true">background-color: rgb(0, 170, 255);</string>
     </property>
     <property name="text">
      <string>Valor do Aluguel</string>
@@ -1020,7 +948,10 @@ color: rgb(255, 255, 255);</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(170, 170, 255);</string>
+     <string notr="true">background-color: rgb(0, 170, 255);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -1070,6 +1001,169 @@ border-color: rgb(255, 0, 255);</string>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_2">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>190</y>
+      <width>260</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>260</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>260</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 170, 255);</string>
+    </property>
+    <property name="insertPolicy">
+     <enum>QComboBox::InsertAlphabetically</enum>
+    </property>
+    <item>
+     <property name="text">
+      <string>Sedan</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hatch</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>SUV</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Utilitário</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Caminhonete</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sportivo</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_3">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>370</y>
+      <width>260</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>260</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>260</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 170, 255);</string>
+    </property>
+    <property name="insertPolicy">
+     <enum>QComboBox::InsertAlphabetically</enum>
+    </property>
+    <item>
+     <property name="text">
+      <string>S</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>N</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="comboBox_4">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>520</y>
+      <width>260</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>260</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>260</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(170, 170, 255);</string>
+    </property>
+    <property name="insertPolicy">
+     <enum>QComboBox::InsertAlphabetically</enum>
+    </property>
+    <item>
+     <property name="text">
+      <string>Alcool</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Gasolina</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Flex</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Diesel</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Podium</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Elétrico</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

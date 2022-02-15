@@ -1,9 +1,13 @@
 from PyQt5 import uic, QtWidgets
 # from classe_reserva import Reserva
 # from classe_veiculo import Veiculo
-# from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import *
 # from PyQt5.QtCore import Qt, QSortFilterProxyModel
-# from PyQt5.QtGui import QStandardItem, QStandardItemModel
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtCore import  pyqtSlot
+from PyQt5.QtPrintSupport import *
+import os,sys
+from PyQt5.QtWidgets import QApplication,QWidget,QPushButton
 import tela_consulta_veiculo
 import pymysql.cursors
 from contextlib import contextmanager
@@ -49,11 +53,14 @@ def chama_segunda_tela():
     tela_login.label_6.setText("")
     nome_usuario = tela_login.lineEdit.text()
     senha = tela_login.lineEdit_2.text()
-    if nome_usuario == "gabriel123" and senha == "123456":
+    consulta(f"SELECT acesso FROM usuario WHERE login = '{nome_usuario}' AND senha = '{senha}'")
+    if nome_usuario == 'gabriel123' and senha == '123456':
         tela_login.close()
         tela_inicial.show()
     else:
         tela_login.label_6.setText("Dados de login incorretos!")
+        QMessageBox.information(QMessageBox(), "Alerta", "Dados inseridos não existentes")
+
 
 
 def limpar_tela_login():
@@ -98,10 +105,14 @@ def add_cliente():
     cnh_cliente = tela_cadastrar_usuario.line_cnh_cliente.text()
     if nome_cliente == "" or email_cliente == "" or cpf_cliente == "" or cnh_cliente == "":
         print("Preencha todos os Campos")
+        QMessageBox.information(QMessageBox(), "Erro", "Preencha todos os Campos")
+
     else:
         cadastro("INSERT INTO `cliente`(`id_cpf`, `nome`, `email`, `cnh`) VALUES ('{}','{}','{}','{}')".
                  format(cpf_cliente, nome_cliente, email_cliente, cnh_cliente))
         print("Adicionado ao BD")
+        QMessageBox.information(QMessageBox(), "Cadastro de Cliente", "O cadastro ao BD foi realizado com sucesso")
+
 
 
 def limpar_add_cliente():
@@ -138,45 +149,42 @@ def tela_consulta_carro():
 
 
 def add_veiculo():
-    modelo = tela_cadastro_veiculo.lineEdit.text()
+    modelo = tela_cadastro_veiculo.comboBox_2.currentText()
     cor = tela_cadastro_veiculo.lineEdit_2.text()
     placa = tela_cadastro_veiculo.lineEdit_3.text()
     chassi = tela_cadastro_veiculo.lineEdit_4.text()
     ano = tela_cadastro_veiculo.lineEdit_5.text()
     status = tela_cadastro_veiculo.lineEdit_6.text()
-    ar_condicionado = tela_cadastro_veiculo.lineEdit_7.text()
+    ar_condicionado = tela_cadastro_veiculo.comboBox_3.currentText()
     marca = tela_cadastro_veiculo.lineEdit_8.text()
     nome = tela_cadastro_veiculo.lineEdit_9.text()
     valor_pago = tela_cadastro_veiculo.lineEdit_91.text()
     km_rodados = tela_cadastro_veiculo.lineEdit_92.text()
-    tipo_combustivel = tela_cadastro_veiculo.lineEdit_93.text()
-    categoria = tela_cadastro_veiculo.lineEdit_95.text()
-    print(modelo, cor, placa, chassi, ano, status, nome, valor_pago, km_rodados, tipo_combustivel, categoria, marca,
-          ar_condicionado)
-    if modelo == "" or cor == "" or placa == "" or chassi == "" or ano == "" or status == "" or \
-            ar_condicionado == "" or marca == "" or nome == "" or valor_pago == "" or km_rodados == "" or \
-            tipo_combustivel == "" or categoria == "":
+    tipo_combustivel = tela_cadastro_veiculo.comboBox_4.currentText()
+    preco_aluguel = tela_cadastro_veiculo.lineEdit_95.text()
+    if cor == "" or placa == "" or chassi == "" or ano == "" or status == "" or marca == "" or nome == "" \
+            or valor_pago == "" or km_rodados == "" or preco_aluguel == "":
         print("Preencha todos os Campos")
+        QMessageBox.information(QMessageBox(), "Erro", "Preencha todos os Campos")
     else:
         cadastro(
             f"INSERT INTO veiculos VALUES ('{modelo}', '{cor}', '{placa}', '{chassi}', '{ano}', '{status}', "
-            f"'{ar_condicionado}', '{marca}', '{nome}', '{valor_pago}', '{km_rodados}','{categoria}', DEFAULT)")
+            f"'{ar_condicionado}', '{marca}', '{nome}', '{valor_pago}', '{km_rodados}',"
+            f"'{tipo_combustivel}','{preco_aluguel}', DEFAULT)")
         print("Adicionado ao BD")
+        QMessageBox.information(QMessageBox(), "Cadastro de Veiculo", "O cadastro ao BD foi realizado com sucesso")
 
 
 def limpa_tela_cadastro_veiculo():
-    tela_cadastro_veiculo.lineEdit.clear()
     tela_cadastro_veiculo.lineEdit_2.clear()
     tela_cadastro_veiculo.lineEdit_3.clear()
     tela_cadastro_veiculo.lineEdit_4.clear()
     tela_cadastro_veiculo.lineEdit_5.clear()
     tela_cadastro_veiculo.lineEdit_6.clear()
-    tela_cadastro_veiculo.lineEdit_7.clear()
     tela_cadastro_veiculo.lineEdit_8.clear()
     tela_cadastro_veiculo.lineEdit_9.clear()
     tela_cadastro_veiculo.lineEdit_91.clear()
     tela_cadastro_veiculo.lineEdit_92.clear()
-    tela_cadastro_veiculo.lineEdit_93.clear()
     tela_cadastro_veiculo.lineEdit_95.clear()
 
 
@@ -199,11 +207,13 @@ def reserva():
 
     if data_retirada == "" or data_devolucao == "" or qtde_diaria == "" or cpf_cliente_reserva == "":
         print("Preencha todos os Campos")
+        QMessageBox.information(QMessageBox(), "Erro", "Preencha todos os Campos")
     else:
         cadastro(f"INSERT INTO reserva VALUES (DEFAULT, '{data_retirada}', '{data_devolucao}', '{forma_pagamento}', "
                  f"'{qtde_diaria}', '{cpf_cliente_reserva}', '{12200}', '{seguro_veicular_1}', '{seguro_veicular_2}', "
                  f"'{seguro_veicular_3}', '{cadeira_bebe}', '{bebe_conforto}', '{condutor_extra}' )")
         print("Adicionado ao BD")
+        QMessageBox.information(QMessageBox(), "Cadastro de Reserva", "O cadastro ao BD foi realizado com sucesso")
 
 
 def limpar_reserva():
