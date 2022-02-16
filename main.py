@@ -98,11 +98,90 @@ def voltar_tela_inicial():
 
 def buscar_reserva():
     cpf_reserva = tela_alterar_reserva_1.lineEdit_5.text()
-    if cpf_reserva == "01863625100":
-        tela_alterar_reserva_1.close()
-        tela_alterar_reserva_2.show()
+    if cpf_reserva == "":
+        QMessageBox.information(QMessageBox(), "Erro", "Preencha todos os Campos Corretamente ou CPF não cadastrado")
     else:
-        pass
+        pega = pega_pega_dados(f"SELECT `data_retirada`, `data_devolucao`, `forma_pagamento`, `quantidade_diaria`, "
+                               f"`fk_cliente_cpf`, `fk_id_veiculo`, `seguro_1`, `seguro_2`, `seguro_3`, `cadeira_bebe`,"
+                               f"`bebe_conforto`, `condutor_extra` FROM `reserva` WHERE fk_cliente_cpf = {cpf_reserva}")
+        for linha, dados in enumerate(pega):
+            for x, values in enumerate(dados.items()):
+                tela_alterar_reserva_1.close()
+                tela_alterar_reserva_2.show()
+                if x == 0:
+                    tela_alterar_reserva_2.lineEdit.setText(str(values[1]))
+                if x == 1:
+                    tela_alterar_reserva_2.lineEdit_2.setText(str(values[1]))
+                if x == 2:
+                    tela_alterar_reserva_2.comboBox.setCurrentText(str(values[1]))
+
+                if x == 3:
+                    tela_alterar_reserva_2.lineEdit_4.setText(str(values[1]))
+
+                if x == 4:
+                    tela_alterar_reserva_2.label_4.setText(cpf_reserva)
+
+                if x == 5:
+                    tela_alterar_reserva_2.comboBox_2.setCurrentText(str(values[1]))
+
+                if x == 6:
+                    tela_alterar_reserva_2.comboBox_4.setCurrentText(str(values[1]))
+
+                if x == 7:
+                    tela_alterar_reserva_2.comboBox_3.setCurrentText(str(values[1]))
+
+                if x == 8:
+                    tela_alterar_reserva_2.comboBox_5.setCurrentText(str(values[1]))
+
+                if x == 9:
+                    tela_alterar_reserva_2.comboBox_6.setCurrentText(str(values[1]))
+
+                if x == 10:
+                    tela_alterar_reserva_2.comboBox_7.setCurrentText(str(values[1]))
+
+                if x == 11:
+                    tela_alterar_reserva_2.comboBox_8.setCurrentText(str(values[1]))
+
+
+def limpar_buscar_reserva():
+    tela_alterar_reserva_1.lineEdit_5.clear()
+
+
+def alterar_dados_reserva_2():
+    data_retirada = tela_alterar_reserva_2.lineEdit.text()
+    data_devolucao = tela_alterar_reserva_2.lineEdit_2.text()
+    forma_pagamento = tela_alterar_reserva_2.comboBox.currentText()
+    qtde_diaria = tela_alterar_reserva_2.lineEdit_4.text()
+    cpf_cliente_reserva = tela_alterar_reserva_2.label_4.text()
+    valor_diaria = 300
+    valor_total = int(qtde_diaria) * valor_diaria
+    tela_alterar_reserva_2.label7_3.setText(f'R$ {valor_total:,.2f}')
+    # serviços adicionais
+    seguro_veicular_1 = tela_alterar_reserva_2.comboBox_4.currentText()
+    seguro_veicular_2 = tela_alterar_reserva_2.comboBox_3.currentText()
+    seguro_veicular_3 = tela_alterar_reserva_2.comboBox_5.currentText()
+    cadeira_bebe = tela_alterar_reserva_2.comboBox_6.currentText()
+    bebe_conforto = tela_alterar_reserva_2.comboBox_7.currentText()
+    condutor_extra = tela_alterar_reserva_2.comboBox_8.currentText()
+
+    if data_retirada == "" or data_devolucao == "" or qtde_diaria == "" or cpf_cliente_reserva == "":
+        print("Preencha todos os Campos")
+        QMessageBox.information(QMessageBox(), "Erro", "Preencha todos os Campos")
+    else:
+        cadastro(f"UPDATE `reserva` SET `data_retirada`='{data_retirada}',`data_devolucao`='{data_devolucao}',"
+                 f"`forma_pagamento`='{forma_pagamento}', `quantidade_diaria`='{qtde_diaria}',`fk_id_veiculo`= {12200},"
+                 f"`seguro_1`='{seguro_veicular_1}',`seguro_2`='{seguro_veicular_2}',`seguro_3`='{seguro_veicular_3}',"
+                 f"`cadeira_bebe`='{cadeira_bebe}',`bebe_conforto`='{bebe_conforto}',"
+                 f"`condutor_extra`='{condutor_extra}' WHERE fk_cliente_cpf = {cpf_cliente_reserva}")
+        print("Adicionado ao BD")
+        QMessageBox.information(QMessageBox(), "Cadastro de Reserva", "O cadastro ao BD foi alterado com sucesso")
+
+
+def limpar_alterar_dados_reserva_2():
+    tela_alterar_reserva_2.lineEdit.clear()
+    tela_alterar_reserva_2.lineEdit_2.clear()
+    tela_alterar_reserva_2.lineEdit_4.clear()
+    tela_alterar_reserva_2.label_4.clear()
 
 
 def add_cliente():
@@ -196,16 +275,15 @@ def limpa_tela_cadastro_veiculo():
 
 def consulta_veiculo():
     texto_selecionado = tela_cadastro_consulta_veicular_1.comboBox_2.currentText()
-    print(texto_selecionado)
-    pega = pega_pega_dados(f"SELECT `modelo`, `cor`, `placa`, `ar_condicionado`, `marca`, `nome`, `km_rodados`, "
-                           f"`tipo_combustivel`, `preco_locacao`, `id_veiculo` FROM `veiculos` "
+    pega = pega_pega_dados(f"SELECT `id_veiculo`, `nome`, `preco_locacao`,  `modelo`, `cor`, `placa`,`ar_condicionado`,"
+                           f" `marca`, `km_rodados`, `tipo_combustivel` FROM `veiculos`"
                            f"WHERE modelo = '{texto_selecionado}'")
-    print(pega)
+
     tela_cadastro_consulta_veicular_2.tableWidget.setRowCount(0)
     for linha, dados in enumerate(pega):
         tela_cadastro_consulta_veicular_2.tableWidget.insertRow(linha)
-        for coluna_n, x in enumerate(dados):
-            tela_cadastro_consulta_veicular_2.tableWidget.setItem(linha, coluna_n, QTableWidgetItem(str(dados)))
+        for x, values in enumerate(dados.items()):
+            tela_cadastro_consulta_veicular_2.tableWidget.setItem(linha, x, QTableWidgetItem(str(values[1])))
 
 
 def consulta_veiculo_troca_tela():
@@ -305,6 +383,7 @@ tela_cadastrar_usuario.pushButton_2.clicked.connect(add_cliente)
 tela_cadastro_consulta_veicular_1.pushButton_2.clicked.connect(consulta_veiculo)
 
 tela_cadastro_consulta_veicular_1.pushButton_2.clicked.connect(consulta_veiculo_troca_tela)
+tela_alterar_reserva_2.pushButton_2.clicked.connect(alterar_dados_reserva_2)
 
 
 # Button Submit limpa as telas
@@ -312,6 +391,8 @@ tela_cadastro_reserva.pushButton_2.clicked.connect(limpar_reserva)
 tela_login.pushButton.clicked.connect(limpar_tela_login)
 tela_cadastro_veiculo.pushButton_2.clicked.connect(limpa_tela_cadastro_veiculo)
 tela_cadastrar_usuario.pushButton_2.clicked.connect(limpar_add_cliente)
+tela_alterar_reserva_2.pushButton_2.clicked.connect(limpar_alterar_dados_reserva_2)
+tela_alterar_reserva_1.pushButton_3.clicked.connect(limpar_buscar_reserva)
 
 # tela_cadastro_veiculo.pushButton_2.clicked.connect(add_veiculo)
 

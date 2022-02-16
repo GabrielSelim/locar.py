@@ -484,88 +484,12 @@ color: rgb(255, 255, 255);</string>
      <string>Submit</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label7_2">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>630</y>
-      <width>120</width>
-      <height>40</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>120</width>
-      <height>40</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>120</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 170, 0);</string>
-    </property>
-    <property name="text">
-     <string>Valor Total:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label7_3">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>630</y>
-      <width>90</width>
-      <height>40</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>90</width>
-      <height>40</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>90</width>
-      <height>40</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 170, 0);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>230</x>
       <y>130</y>
-      <width>221</width>
+      <width>281</width>
       <height>41</height>
      </rect>
     </property>
@@ -580,7 +504,7 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">background-color: rgb(85, 255, 127);</string>
     </property>
     <property name="text">
-     <string>Cadastro de Reserva</string>
+     <string>Alterar dados da Reserva</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
